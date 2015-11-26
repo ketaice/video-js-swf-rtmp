@@ -290,6 +290,9 @@ package{
                 case "rtmpStream":
                     return _app.model.rtmpStream;
                     break;
+                case "bufferLength":
+                	return _app.model.bufferLength;
+                	break;
             }
             return null;
         }
@@ -346,6 +349,9 @@ package{
                 case "rtmpStream":
                     _app.model.rtmpStream = String(pValue);
                     break;
+                case "bufferLength":
+                	_app.model.bufferLength = Number(pValue);
+                	break;
                 default:
                     _app.model.broadcastErrorEventExternally(ExternalErrorEventName.PROPERTY_NOT_FOUND, pPropertyName);
                     break;

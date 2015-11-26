@@ -187,5 +187,8 @@ package com.videojs.providers{
          */
         function die():void;
         
+        function get bufferLength():Number;
+        
+        function set bufferLength(pValue:Number):void;
     }
 }

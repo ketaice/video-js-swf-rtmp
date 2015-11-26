@@ -521,6 +521,19 @@ package com.videojs{
             }
         }
 
+        public function get bufferLength():Number{
+            if(_provider){
+                return _provider.bufferLength;
+            }
+            return 0;
+        }
+        
+        public function set bufferLength(pValue:Number):void {
+        	if(_provider){
+                _provider.bufferLength = pValue;
+            }
+        }
+
         public function hexToNumber(pHex:String):Number{
             var __number:Number = 0;
             // clean it up

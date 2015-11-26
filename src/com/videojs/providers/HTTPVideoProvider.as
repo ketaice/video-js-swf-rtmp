@@ -692,5 +692,11 @@ package com.videojs.providers{
         public function onPlayStatus(e:Object):void{
 
         }
+        
+        public function get bufferLength():Number {
+        	return 0;
+        }
+        
+        public function set bufferLength(pValue:Number):void {}
     }
 }

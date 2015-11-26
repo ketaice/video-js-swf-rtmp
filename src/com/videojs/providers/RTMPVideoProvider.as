@@ -48,6 +48,8 @@ package com.videojs.providers{
         private var _canPlayThrough:Boolean = false;
         private var _loop:Boolean = false;
         
+        private var _bufferLength:Number = 1;
+        
         private var _model:VideoJSModel;
         
         public function RTMPVideoProvider(){
@@ -331,6 +333,7 @@ package com.videojs.providers{
         public function stop():void{
             if(_isPlaying){
                 _ns.close();
+                _loadStarted = false;	// fixed by Keta
                 _isPlaying = false;
                 _hasEnded = true;
                 _reportEnded = true;
@@ -422,7 +425,7 @@ package com.videojs.providers{
             _ns = new NetStream(_nc);
             _ns.addEventListener(NetStatusEvent.NET_STATUS, onNetStreamStatus);
             _ns.client = this;
-            _ns.bufferTime = 1;
+            _ns.bufferTime = _bufferLength;	//1;
             _ns.play(_src.streamURL);
             _videoReference.attachNetStream(_ns);
             _model.broadcastEventExternally(ExternalEventName.ON_LOAD_START);
@@ -649,5 +652,18 @@ package com.videojs.providers{
          * This is here to prevent runtime errors.
          */
         public function streamInfo(pObj:Object):void {}        
+        
+        public function get bufferLength():Number {
+        	return _bufferLength;
+        }
+        
+        public function set bufferLength(pValue:Number):void {
+        	if (_bufferLength > 0) {		// It should be a Problem!
+	        	_bufferLength = pValue;
+	        	if (_isPlaying) {       	  
+	        		_ns.bufferTime = _bufferLength;
+	        	}
+            }
+        }
     }
 }

@@ -372,6 +372,12 @@ package com.videojs.providers{
             }
         }
 
+        public function get bufferLength():Number {
+        	return 0;
+        }
+        
+        public function set bufferLength(pValue:Number):void {}
+
         private function doLoadCalculations():void{
             // if the load is finished
             if(_sound.bytesLoaded == _sound.bytesTotal){
